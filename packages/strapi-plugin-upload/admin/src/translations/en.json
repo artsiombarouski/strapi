@@ -44,6 +44,7 @@
   "modal.file-details.dimensions": "Dimensions",
   "modal.file-details.extension": "Extension",
   "modal.file-details.size": "Size",
+  "modal.file-details.duration": "Duration",
   "modal.header.browse": "Upload assets",
   "modal.header.file-detail": "Details",
   "modal.header.pending-assets": "Pending assets",

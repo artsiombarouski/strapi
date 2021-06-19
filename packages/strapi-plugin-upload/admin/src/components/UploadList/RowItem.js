@@ -43,7 +43,7 @@ const RowItem = ({
   const shouldDisplayTrashIcon = file === null && hasError;
 
   const cardOptions = {
-    ...pick(fileInfo, ['ext', 'name', 'mime', 'height', 'width', 'previewUrl', 'id']),
+    ...pick(fileInfo, ['ext', 'name', 'mime', 'height', 'width', 'previewUrl', 'id', 'duration']),
     small: true,
     errorMessage,
     hasError,

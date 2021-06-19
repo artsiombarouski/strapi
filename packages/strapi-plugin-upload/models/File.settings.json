@@ -81,6 +81,10 @@
       "collection": "*",
       "filter": "field",
       "configurable": false
+    },
+    "duration":{
+      "type": "decimal",
+      "configurable": false
     }
   }
 }

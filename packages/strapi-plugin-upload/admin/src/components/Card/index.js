@@ -33,6 +33,7 @@ const Card = ({
     type,
     url,
     width,
+    duration,
     withFileCaching = true,
     withoutFileInfo,
   },
@@ -87,7 +88,7 @@ const Card = ({
             {tooltipIsDisplayed && <Tooltip id={`${id}`} />}
             <Tag label={getType(fileType)} />
           </Flex>
-          <FileInfos extension={generatedExtension} size={fileSize} width={width} height={height} />
+          <FileInfos extension={generatedExtension} size={fileSize} width={width} height={height} duration={duration} />
         </>
       )}
       {hasError && <ErrorMessage title={errorMessage}>{errorMessage}</ErrorMessage>}
@@ -114,6 +115,7 @@ Card.defaultProps = {
     type: null,
     url: null,
     width: null,
+    duration: null,
     withFileCaching: true,
     withoutFileInfo: false,
   },
@@ -135,6 +137,7 @@ Card.propTypes = {
     type: PropTypes.string,
     url: PropTypes.string,
     width: PropTypes.number,
+    duration: PropTypes.number,
     withFileCaching: PropTypes.bool,
     withoutFileInfo: PropTypes.bool,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

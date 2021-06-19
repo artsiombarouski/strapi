@@ -8,10 +8,11 @@ import { Text, Flex } from '@buffetjs/core';
 import { formatBytes, getTrad } from '../../utils';
 
 import FileDetailsBoxWrapper from './FileDetailsBoxWrapper';
+import formatDuration from "../Duration/utils/formatDuration";
 
 const FileDetailsBox = ({ file }) => {
   const { formatMessage } = useIntl();
-  const fileSize = file.mime ? get(file, 'size', 0) : get(file, 'size', 0) / 1000;
+  const fileSize = file.mime ? get(file, 'size', 0) : get(file, 'size', 0);
   const sections = [
     {
       key: 0,
@@ -38,6 +39,19 @@ const FileDetailsBox = ({ file }) => {
           label: 'modal.file-details.extension',
           value: file.ext ? file.ext.replace('.', '') : '-',
           textTransform: 'uppercase',
+        },
+      ],
+    },
+    {
+      key: 3,
+      type: 'spacer',
+    },
+    {
+      key: 4,
+      rows: [
+        {
+          label: 'modal.file-details.duration',
+          value: file.duration ? formatDuration(file.duration) : '-',
         },
       ],
     },
@@ -89,6 +103,7 @@ FileDetailsBox.propTypes = {
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     size: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    duration: PropTypes.number,
   }),
 };
 

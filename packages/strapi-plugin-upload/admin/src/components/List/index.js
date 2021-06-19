@@ -48,7 +48,7 @@ const List = ({
           const fileUrl = prefixFileUrlWithBackendUrl(thumbnail.url);
 
           const cardOptions = {
-            ...pick(item, ['ext', 'name', 'mime', 'height', 'width', 'size', 'previewUrl', 'id']),
+            ...pick(item, ['ext', 'name', 'mime', 'height', 'width', 'size', 'previewUrl', 'id', 'duration']),
             isDisabled: !isAllowed,
             checked,
             url: fileUrl,

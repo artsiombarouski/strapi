@@ -120,6 +120,15 @@ module.exports = {
       metas
     );
 
+    const {getAudioDuration} = strapi.plugins.upload.services['audio-manipulation'];
+
+    formattedFile.duration = await getAudioDuration({buffer: buffer, mimeType: file.type, size: file.size})
+
+    if (!formattedFile.duration) {
+      const {getVideoMetadata} = strapi.plugins.upload.services['video-manipulation'];
+      const videoMeta = await getVideoMetadata({buffer: buffer, mime: file.type});
+      formattedFile.duration = videoMeta?.format?.duration;
+    }
     return _.assign(formattedFile, info, {
       buffer,
     });
@@ -151,9 +160,13 @@ module.exports = {
       generateResponsiveFormats,
     } = strapi.plugins.upload.services['image-manipulation'];
 
+    const {
+      generateVideoThumbnail
+    } = strapi.plugins.upload.services['video-manipulation'];
+
     await strapi.plugins.upload.provider.upload(fileData);
 
-    const thumbnailFile = await generateThumbnail(fileData);
+    const thumbnailFile = await generateThumbnail(fileData) ?? await generateVideoThumbnail(fileData);
     if (thumbnailFile) {
       await strapi.plugins.upload.provider.upload(thumbnailFile);
       delete thumbnailFile.buffer;
@@ -175,6 +188,8 @@ module.exports = {
     }
 
     const { width, height } = await getDimensions(fileData.buffer);
+
+    // Generating video preview
 
     delete fileData.buffer;
 
@@ -212,6 +227,10 @@ module.exports = {
       generateResponsiveFormats,
     } = strapi.plugins.upload.services['image-manipulation'];
 
+    const {
+      generateVideoThumbnail
+    } = strapi.plugins.upload.services['video-manipulation'];
+
     const dbFile = await this.fetch({ id });
 
     if (!dbFile) {
@@ -245,7 +264,7 @@ module.exports = {
     // clear old formats
     _.set(fileData, 'formats', {});
 
-    const thumbnailFile = await generateThumbnail(fileData);
+    const thumbnailFile = await generateThumbnail(fileData) ?? await generateVideoThumbnail(fileData);
     if (thumbnailFile) {
       await strapi.plugins.upload.provider.upload(thumbnailFile);
       delete thumbnailFile.buffer;

@@ -7,7 +7,7 @@ const formatFileForEditing = file => {
     abortController,
     id: file.id,
     file: {
-      ...pick(file, ['size', 'ext', 'width', 'height', 'mime', 'name', 'url']),
+      ...pick(file, ['size', 'ext', 'width', 'height', 'mime', 'name', 'url', 'duration']),
       created_at: file.created_at || file.createdAt,
     },
     fileInfo: pick(file, ['alternativeText', 'caption', 'name']),
