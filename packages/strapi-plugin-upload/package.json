@@ -1,5 +1,6 @@
 {
-  "name": "strapi-plugin-upload",
+  "name": "@artsiombarouski/strapi-plugin-upload",
+  "repository": "git://git@github.com:artsiombarouski/strapi.git",
   "version": "3.6.3",
   "description": "Makes it easy to upload images and files to your Strapi Application.",
   "strapi": {
